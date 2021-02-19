@@ -1,20 +1,38 @@
 function drawPolygon(points) {
     let canvas = document.getElementById('canvas');
-    let gl = canvas.getContext('experimental-webgl');
+    gl = canvas.getContext('webgl');
+
+    console.log("Canvas => ", canvas);
+    console.log("GL => ", gl);
+
+    let convertedPoints = [];
+    for (let p in points) {
+        convertedPoints.push(convertPoint(p));
+    }
 
     /*========== Defining and storing the geometry =========*/
-
     let vertices = []
-    for (let p in points) {
-        vertices.push(p.x, p.y, 0.0);
+    for (let i = 0; i < points.length; i++) {
+        let p = points[i];
+        vertices.push((p.x - 300) / 300, (300 - p.y) / 300, 0.0);
     }
 
     let indices = []
     for (let i = 1; i < vertices.length - 1; i++) {
         for (let j = i + 1; j < vertices.length; j++) {
-            indices.push(0, indices[i], indices[j]);
+            indices.push(0, i, j);
         }
     }
+    console.log(vertices);
+    console.log(indices);
+    // var vertices = [
+    //     -0.5,0.5,0.0,
+    //     -0.5,-0.5,0.0,
+    //     0.5,-0.5,0.0,
+    //     0.5,0.5,0.0 
+    //  ];
+
+    // let indices = [3,2,1,3,1,0];
 
     // Create an empty buffer object to store vertex buffer
     let vertex_buffer = gl.createBuffer();
@@ -61,7 +79,7 @@ function drawPolygon(points) {
     // Fragment shader source code
     let fragCode =
         'void main(void) {' +
-        ' gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' +
+        ' gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);' +
         '}';
 
     // Create fragment shader object 
