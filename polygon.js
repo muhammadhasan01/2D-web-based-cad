@@ -1,15 +1,26 @@
+var btn = document.getElementById('btn-polygon');
+
+export function handleButtonPolygon() {
+    let btn = document.getElementById('btn-polygon');
+    if (btn.innerHTML === "Start Create Polygon") {
+        btn.innerHTML = "Stop Create Polygon";
+    } else {
+        btn.innerHTML = "Start Create Polygon";
+    }
+}
+
 export const drawPolygon = (points) => {
-    var canvas = document.getElementById('canvas');
-    gl = canvas.getContext('experimental-webgl');
+    let canvas = document.getElementById('canvas');
+    let gl = canvas.getContext('experimental-webgl');
 
     /*========== Defining and storing the geometry =========*/
 
-    var vertices = []
+    let vertices = []
     for (let p in points) {
         vertices.push(p.x, p.y, 0.0);
     }
 
-    indices = []
+    let indices = []
     for (let i = 1; i < vertices.length - 1; i++) {
         for (let j = i + 1; j < vertices.length; j++) {
             indices.push(0, indices[i], indices[j]);
@@ -17,7 +28,7 @@ export const drawPolygon = (points) => {
     }
 
     // Create an empty buffer object to store vertex buffer
-    var vertex_buffer = gl.createBuffer();
+    let vertex_buffer = gl.createBuffer();
 
     // Bind appropriate array buffer to it
     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
@@ -29,7 +40,7 @@ export const drawPolygon = (points) => {
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
     // Create an empty buffer object to store Index buffer
-    var Index_Buffer = gl.createBuffer();
+    let Index_Buffer = gl.createBuffer();
 
     // Bind appropriate array buffer to it
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
@@ -43,14 +54,14 @@ export const drawPolygon = (points) => {
     /*====================== Shaders =======================*/
 
     // Vertex shader source code
-    var vertCode =
-    'attribute vec3 coordinates;' +
-    'void main(void) {' +
+    let vertCode =
+        'attribute vec3 coordinates;' +
+        'void main(void) {' +
         ' gl_Position = vec4(coordinates, 1.0);' +
-    '}';
+        '}';
 
     // Create a vertex shader object
-    var vertShader = gl.createShader(gl.VERTEX_SHADER);
+    let vertShader = gl.createShader(gl.VERTEX_SHADER);
 
     // Attach vertex shader source code
     gl.shaderSource(vertShader, vertCode);
@@ -59,13 +70,13 @@ export const drawPolygon = (points) => {
     gl.compileShader(vertShader);
 
     // Fragment shader source code
-    var fragCode =
-    'void main(void) {' +
+    let fragCode =
+        'void main(void) {' +
         ' gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' +
-    '}';
+        '}';
 
     // Create fragment shader object 
-    var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+    let fragShader = gl.createShader(gl.FRAGMENT_SHADER);
 
     // Attach fragment shader source code
     gl.shaderSource(fragShader, fragCode);
@@ -75,7 +86,7 @@ export const drawPolygon = (points) => {
 
     // Create a shader program object to
     // store the combined shader program
-    var shaderProgram = gl.createProgram();
+    let shaderProgram = gl.createProgram();
 
     // Attach a vertex shader
     gl.attachShader(shaderProgram, vertShader);
@@ -95,10 +106,10 @@ export const drawPolygon = (points) => {
     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
 
     // Bind index buffer object
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer); 
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
 
     // Get the attribute location
-    var coord = gl.getAttribLocation(shaderProgram, "coordinates");
+    let coord = gl.getAttribLocation(shaderProgram, "coordinates");
 
     // Point an attribute to the currently bound VBO
     gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
@@ -118,14 +129,14 @@ export const drawPolygon = (points) => {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     // Set the view port
-    gl.viewport(0,0,canvas.width,canvas.height);
+    gl.viewport(0, 0, canvas.width, canvas.height);
 
     // Draw the triangle
-    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
+    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 }
 
 export const addPolygon = (points) => {
-    geometryObject = new Object();
+    let geometryObject = new Object();
     geometryObject.type = "polygon";
     geometryObject.points = points;
     geometryObject.color = "black";

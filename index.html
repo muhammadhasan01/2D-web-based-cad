@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="utf-8">
 <head>
     <title>Something</title>
     <link rel="stylesheet" href="style.css" />
+
 </head>
 <body>
     <canvas id='canvas' width='500' height='500'></canvas>
     <input type="file" name="inputfile"
-            id="inputfile"> 
-    <br> 
-   
-    <pre id="output"></pre> 
-    <script src="script.js"></script>
-    <script src="data.js"></script>
+            id="inputfile">
+    <br>
+
+    <button id="btn-line">Create Line</button>
+    <button id="btn-polygon">Start Create Polygon</button>
+
+    <script type="text/javascript" src="line.js"></script>
+    <script type="module" src="data.js"></script>
+    <script type="module" src="polygon.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <pre id="output"></pre>
 </body>
 </html>
