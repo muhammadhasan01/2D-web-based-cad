@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "vue-form-generator": "^2.3.4"
+  }
+}

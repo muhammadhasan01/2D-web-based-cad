@@ -10,6 +10,9 @@ function renderObjects(globalData) {
         } else if (geo.type == "polygon") {
             alert("saya poligon");
             drawPolygon(geo.points);
+        } else if(geo.type == "square") {
+            alert("saya kotak");
+            drawPolygon(geo.points);
         }
     }
 }
