@@ -14,7 +14,7 @@ function drawLine(points) {
         vertices.push((p.x - 300) / 300, (300 - p.y) / 300, 0.0);
     }
     console.log("Mantap");
-    console.log(vertices);
+    console.log(vertices); 
 
      // Create an empty buffer object
      var vertex_buffer = gl.createBuffer();
@@ -49,7 +49,7 @@ function drawLine(points) {
      // Fragment shader source code
      var fragCode =
         'void main(void) {' +
-           'gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' +
+           'gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);' +
         '}';
 
      // Create fragment shader object
@@ -94,7 +94,7 @@ function drawLine(points) {
      /*============ Drawing the triangle =============*/
 
      // Clear the canvas
-     gl.clearColor(0.5, 0.5, 0.5, 0.9);
+   //   gl.clearColor(0.5, 0.5, 0.5, 0.9);
 
      // Enable the depth test
      gl.enable(gl.DEPTH_TEST);
