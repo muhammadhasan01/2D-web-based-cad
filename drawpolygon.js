@@ -1,38 +1,30 @@
-function drawPolygon(points) {
+function drawPolygon(list_of_points) {
+    if (list_of_points.length === 0) return;
     let canvas = document.getElementById('canvas');
     gl = canvas.getContext('webgl');
 
-    console.log("Canvas => ", canvas);
-    console.log("GL => ", gl);
-
-    let convertedPoints = [];
-    for (let p in points) {
-        convertedPoints.push(convertPoint(p));
-    }
-
     /*========== Defining and storing the geometry =========*/
-    let vertices = []
-    for (let i = 0; i < points.length; i++) {
-        let p = points[i];
-        vertices.push((p.x - 300) / 300, (300 - p.y) / 300, 0.0);
-    }
-
-    let indices = []
-    for (let i = 1; i < vertices.length - 1; i++) {
-        for (let j = i + 1; j < vertices.length; j++) {
-            indices.push(0, i, j);
+    console.log(list_of_points);
+    let vertices = [];
+    let indices = [];
+    let curIdx = 0;
+    for (let it = 0; it < list_of_points.length; it++) {
+        let points = list_of_points[it];
+        console.log(it, points);
+        for (let i = 0; i < points.length; i++) {
+            let p = points[i];
+            vertices.push((p.x - 300) / 300, (300 - p.y) / 300, 0.0);
         }
+        for (let i = 1; i < points.length - 1; i++) {
+            for (let j = i + 1; j < points.length; j++) {
+                indices.push(curIdx, curIdx + i, curIdx + j);
+            }
+        }
+        curIdx += points.length;
     }
+    
     console.log(vertices);
     console.log(indices);
-    // var vertices = [
-    //     -0.5,0.5,0.0,
-    //     -0.5,-0.5,0.0,
-    //     0.5,-0.5,0.0,
-    //     0.5,0.5,0.0 
-    //  ];
-
-    // let indices = [3,2,1,3,1,0];
 
     // Create an empty buffer object to store vertex buffer
     let vertex_buffer = gl.createBuffer();
@@ -79,7 +71,7 @@ function drawPolygon(points) {
     // Fragment shader source code
     let fragCode =
         'void main(void) {' +
-        ' gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);' +
+        ' gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);' +
         '}';
 
     // Create fragment shader object 
@@ -127,7 +119,7 @@ function drawPolygon(points) {
     /*============= Drawing the Quad ================*/
 
     // Clear the canvas
-    gl.clearColor(0.5, 0.5, 0.5, 0.9);
+    // gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
     // Enable the depth test
     gl.enable(gl.DEPTH_TEST);

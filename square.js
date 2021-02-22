@@ -25,7 +25,7 @@ function handleClickCreateSquare(e) {
     curPoint.x = canvasX, curPoint.y = canvasY;
     squarePoints.push(curPoint);
     if (squarePoints.length == 2) {
-        alert("Succesfully created line");
+        alert("Succesfully created square");
         let square = new Object;
         square.type = "square";
         square.points = [];
