@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="utf-8">
 <head>
-    <title>Something</title>
+    <title>2D Web Based CAD</title>
     <link rel="stylesheet" href="style.css" />
 
 </head>
@@ -18,6 +18,8 @@
     <button id="btn-polygon">Start Create Polygon</button> </br>
     <button id="save" onclick="saveGlobalData();">Save</button>
     <input id="load" type="file" onchange="loadGlobalData();" /> </br>
+    <button id="change-data" onclick="editData();">Start Editing Data</button> </br>
+    <div id="edit-data"></div>
     <label for="colors">Choose a color:</label>
     <select id="colors" name="colors">
         <option value="black">black</option>
@@ -25,8 +27,9 @@
         <option value="green">green</option>
         <option value="blue">blue</option>
     </select>
+    <div class="coba"></div>
+    <p class="coba"></p>
     <input type="submit" value="Submit" onclick="changeColor();">
-
     <script type="text/javascript" src="color.js"></script>
     <script type="text/javascript" src="render.js"></script>
     <script type="text/javascript" src="data.js"></script>
@@ -37,6 +40,6 @@
     <script type="text/javascript" src="square.js"></script>
     <script type="text/javascript" src="polygon.js"></script>
     <script type="text/javascript" src="script.js"></script>
-    <!-- <pre id="output"></pre> -->
+    <script type="text/javascript" src="editdata.js"></script>
 </body>
 </html>

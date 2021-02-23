@@ -36,8 +36,13 @@ function handleClickCreateSquare(e) {
                 square.points.push(createPoint);
             }
         }
-        square.length = dist(square.x1, square.y1, square.x2, square.y2);
+        square.length = dist(square.x1, square.y1, square.x2, square.y2) / Math.sqrt(2);
         square.color = "black";
+        square.points.sort((a, b) => {
+            if (a.x === b.x)
+                return a.y - b.y;
+            return a.x - b.x;
+        });
         globalData.push(square);
         showGlobalData(globalData);
         // TODO: Make sure renderObject is right

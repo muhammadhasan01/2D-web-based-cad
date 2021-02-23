@@ -24,7 +24,6 @@ function handleClickCreateLine(e) {
     linePoints.push(curPoint);
     if (linePoints.length == 2) {
         alert("Succesfully created line");
-        alert("vfdggbf");
         let line = new Object;
         line.type = "line";
         line.points = [];
@@ -33,6 +32,9 @@ function handleClickCreateLine(e) {
         }
         console.log("Tesss");
         console.log(line.points);
+        line.points.sort((a, b) => {
+            return a.x - b.x;
+        })
         line.length = dist(line.x1, line.y1, line.x2, line.y2);
         line.color = "black";
         globalData.push(line);
