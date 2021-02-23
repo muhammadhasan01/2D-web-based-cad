@@ -3,6 +3,7 @@ let globalData = []
 let globalColor = "black";
 
 function showGlobalData() {
+    console.log("GLOBAL : ");
     console.log(globalData);
 }
 

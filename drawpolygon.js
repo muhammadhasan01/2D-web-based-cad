@@ -1,7 +1,7 @@
 function drawPolygon(list_of_points) {
     if (list_of_points.length === 0) return;
-    let canvas = document.getElementById('canvas');
-    gl = canvas.getContext('webgl');
+    
+
 
     /*========== Defining and storing the geometry =========*/
     console.log(list_of_points);
@@ -27,28 +27,28 @@ function drawPolygon(list_of_points) {
     console.log(indices);
 
     // Create an empty buffer object to store vertex buffer
-    let vertex_buffer = gl.createBuffer();
+    let vertex_buffer = this.gl.createBuffer();
 
     // Bind appropriate array buffer to it
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, vertex_buffer);
 
     // Pass the vertex data to the buffer
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(vertices), this.gl.STATIC_DRAW);
 
     // Unbind the buffer
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
     // Create an empty buffer object to store Index buffer
-    let Index_Buffer = gl.createBuffer();
+    let Index_Buffer = this.gl.createBuffer();
 
     // Bind appropriate array buffer to it
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+    this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
 
     // Pass the vertex data to the buffer
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+    this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), this.gl.STATIC_DRAW);
 
     // Unbind the buffer
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+    this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, null);
 
     /*====================== Shaders =======================*/
 
@@ -56,17 +56,18 @@ function drawPolygon(list_of_points) {
     let vertCode =
         'attribute vec3 coordinates;' +
         'void main(void) {' +
+        'gl_PointSize = 7.0;' +
         ' gl_Position = vec4(coordinates, 1.0);' +
         '}';
 
     // Create a vertex shader object
-    let vertShader = gl.createShader(gl.VERTEX_SHADER);
+    let vertShader = this.gl.createShader(this.gl.VERTEX_SHADER);
 
     // Attach vertex shader source code
-    gl.shaderSource(vertShader, vertCode);
+    this.gl.shaderSource(vertShader, vertCode);
 
     // Compile the vertex shader
-    gl.compileShader(vertShader);
+    this.gl.compileShader(vertShader);
 
     // Fragment shader source code
     let geoColor = getColor(globalColor);
@@ -77,61 +78,64 @@ function drawPolygon(list_of_points) {
         '}';
 
     // Create fragment shader object 
-    let fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+    let fragShader = this.gl.createShader(this.gl.FRAGMENT_SHADER);
 
     // Attach fragment shader source code
-    gl.shaderSource(fragShader, fragCode);
+    this.gl.shaderSource(fragShader, fragCode);
 
     // Compile the fragmentt shader
-    gl.compileShader(fragShader);
+    this.gl.compileShader(fragShader);
 
     // Create a shader program object to
     // store the combined shader program
-    let shaderProgram = gl.createProgram();
+    let shaderProgram = this.gl.createProgram();
 
     // Attach a vertex shader
-    gl.attachShader(shaderProgram, vertShader);
+    this.gl.attachShader(shaderProgram, vertShader);
 
     // Attach a fragment shader
-    gl.attachShader(shaderProgram, fragShader);
+    this.gl.attachShader(shaderProgram, fragShader);
 
     // Link both the programs
-    gl.linkProgram(shaderProgram);
+    this.gl.linkProgram(shaderProgram);
 
     // Use the combined shader program object
-    gl.useProgram(shaderProgram);
+    this.gl.useProgram(shaderProgram);
 
     /* ======= Associating shaders to buffer objects =======*/
 
     // Bind vertex buffer object
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, vertex_buffer);
 
     // Bind index buffer object
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+    this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
 
     // Get the attribute location
-    let coord = gl.getAttribLocation(shaderProgram, "coordinates");
+    let coord = this.gl.getAttribLocation(shaderProgram, "coordinates");
 
     // Point an attribute to the currently bound VBO
-    gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
+    this.gl.vertexAttribPointer(coord, 3, this.gl.FLOAT, false, 0, 0);
 
     // Enable the attribute
-    gl.enableVertexAttribArray(coord);
+    this.gl.enableVertexAttribArray(coord);
 
     /*============= Drawing the Quad ================*/
 
     // Clear the canvas
-    // gl.clearColor(1.0, 1.0, 1.0, 1.0);
+    // this.gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
     // Enable the depth test
-    gl.enable(gl.DEPTH_TEST);
+    this.gl.enable(this.gl.DEPTH_TEST);
 
     // Clear the color buffer bit
-    gl.clear(gl.COLOR_BUFFER_BIT);
+    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 
     // Set the view port
-    gl.viewport(0, 0, canvas.width, canvas.height);
+    this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+
+    //
+    this.gl.drawArrays(this.gl.POINTS, 0, vertices.length / 3);
 
     // Draw the triangle
-    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+    this.gl.drawElements(this.gl.TRIANGLES, indices.length, this.gl.UNSIGNED_SHORT, 0);
 }
