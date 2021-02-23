@@ -1,5 +1,6 @@
 // globalData is an array of geometry objects
 let globalData = []
+let globalColor = "black";
 
 function showGlobalData() {
     console.log(globalData);
@@ -56,4 +57,11 @@ function loadGlobalData() {
     reader.onerror = (e) => alert(e.target.error.name); 
   
     reader.readAsText(file);
+}
+
+function changeColor() {
+    let x = document.getElementById("colors").selectedIndex;
+    globalColor = document.getElementsByTagName("option")[x].value;
+    console.log("The color is now", globalColor);
+    renderObjects(globalData);
 }

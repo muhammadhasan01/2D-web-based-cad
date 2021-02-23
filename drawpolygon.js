@@ -69,9 +69,11 @@ function drawPolygon(list_of_points) {
     gl.compileShader(vertShader);
 
     // Fragment shader source code
+    let geoColor = getColor(globalColor);
+    console.log("wow", geoColor);
     let fragCode =
         'void main(void) {' +
-        ' gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);' +
+        ` gl_FragColor = vec4(${geoColor[0]}, ${geoColor[1]}, ${geoColor[2]}, 1.0);` +
         '}';
 
     // Create fragment shader object 

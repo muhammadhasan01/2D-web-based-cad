@@ -6,5 +6,5 @@ function getColor(color) {
     if (color === "green")
         return [0.0, 1.0, 0.0];
     if (color === "blue")
-        return [0.0, 0.0, 1];
+        return [0.0, 0.0, 1.0];
 }

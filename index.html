@@ -6,6 +6,7 @@
 
 </head>
 <body>
+    <h3>2D Web Based CAD</h3>
     <canvas id='canvas' width='600' height='600'></canvas>
     <!-- <input type="file" name="inputfile"
             id="inputfile"> -->
@@ -13,9 +14,21 @@
 
     <button id="btn-line">Start Create Line</button>
     <button id="btn-square">Start Create Square</button>
-    <button id="btn-polygon">Start Create Polygon</button>
+    <button id="btn-polygon">Start Create Polygon</button> </br>
     <button id="save" onclick="saveGlobalData();">Save</button>
-    <input id="load" type="file" onchange="loadGlobalData();" />
+    <input id="load" type="file" onchange="loadGlobalData();" /> </br>
+    <!-- <form> -->
+        <label for="colors">Choose a color:</label>
+        <select id="colors" name="colors">
+            <option value="black">black</option>
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+        </select>
+        <input type="submit" value="Submit" onclick="changeColor();">
+    <!-- </form> -->
+
+    <script type="text/javascript" src="color.js"></script>
     <script type="text/javascript" src="render.js"></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="utils.js"></script>
