@@ -130,9 +130,6 @@ function drawPolygon(list_of_points) {
     // Clear the color buffer bit
     this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 
-    // Set the view port
-    this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
-
     //
     this.gl.drawArrays(this.gl.POINTS, 0, vertices.length / 3);
 

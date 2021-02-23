@@ -4,7 +4,7 @@ function renderObjects(globalData) {
         let geo = globalData[i];
         console.log(geo);
         if (geo.type == "line") {
-            drawLine(geo.points);
+            polygonPoints.push(geo.points);
         } else if (geo.type == "polygon" || geo.type == "square") {
             polygonPoints.push(geo.points);
         }

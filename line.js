@@ -28,13 +28,14 @@ function handleClickCreateLine(e) {
         line.type = "line";
         line.points = [];
         for (let i = 0; i < 2; i++) {
-            line.points.push(linePoints[i]);
+            let createPoint = new Object;
+            createPoint.x = linePoints[i].x-1, createPoint.y = linePoints[i].y;
+            line.points.push(createPoint);
+
+            createPoint = new Object;
+            createPoint.x = linePoints[i].x, createPoint.y = linePoints[i].y-1;
+            line.points.push(createPoint);
         }
-        console.log("Tesss");
-        console.log(line.points);
-        line.points.sort((a, b) => {
-            return a.x - b.x;
-        })
         line.length = dist(line.x1, line.y1, line.x2, line.y2);
         line.color = "black";
         globalData.push(line);
@@ -51,7 +52,7 @@ btnLine.onclick = function() {
         alert("You can start creating line");
         let canvas = document.getElementById("canvas");
         linePoints = [];
-        canvas.addEventListener("click", handleClickCreateLine);
+        canvas.addEventListener("mousedown", handleClickCreateLine);
     } else {
         btnLine.innerHTML = "Start creating line";
         alert("Stopped creating line");

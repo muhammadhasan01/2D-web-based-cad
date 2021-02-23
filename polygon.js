@@ -84,7 +84,7 @@ this.canvas.addEventListener("mousedown", (e) => {
                 if(globalData[j]["points"][i]["y"]-5 <= getpoint[1] && globalData[j]["points"][i]["y"]+5 >= getpoint[1]) {
                   dataIndex = j;
                   pointIndex = i;
-                  alert("DDDDDDDDDDDDDDDDDDDDD");
+                //   alert("DDDDDDDDDDDDDDDDDDDDD");
                   break;
                 }
               }

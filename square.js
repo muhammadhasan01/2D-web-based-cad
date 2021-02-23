@@ -1,5 +1,3 @@
-// TODO: Implement create square (copas line + modif aja)
-
 // Create Square
 let btnSquare = document.getElementById('btn-square');
 let btnSquareCnt = 0;

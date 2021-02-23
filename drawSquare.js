@@ -14,7 +14,7 @@ function drawSquare(points) {
     let vertices = []
     for (let i = 0; i < points.length; i++) {
         let p = points[i];
-        vertices.push((p.x - 300) / 300, (300 - p.y) / 300, 0.0);
+        vertices.push((p.x - 300) / 300, (300 - p.x) / 300, 0.0);
     }
 
     let indices = []
