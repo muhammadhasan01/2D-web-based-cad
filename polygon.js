@@ -46,7 +46,6 @@ function handleClickCreatePolygon(e) {
 var t = this;
 
 btnPolygon.onclick = function() {
-    if(t.isMoving == false) {
         btnPolygonCnt++;
         if (btnPolygonCnt % 2 == 1) {
             btnPolygon.innerHTML = "Stop creating polygon";
@@ -65,8 +64,6 @@ btnPolygon.onclick = function() {
             let canvas = document.getElementById("canvas");
             canvas.removeEventListener("click", handleClickCreatePolygon);
         }
-
-    }
 }
 
 moveButton.addEventListener("click", () => {
@@ -84,17 +81,18 @@ this.canvas.addEventListener("mousedown", (e) => {
     isDown = true;
     var getpoint = [e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop, 0];
     if(dataIndex == -1 && pointIndex == -1) {
-        for(var j=0; j<globalData.length; j++){            
-            for(var i=0; i<globalData[j]["points"].length; i++){
-              
-              if(globalData[j]["points"][i]["x"]-5 <= getpoint[0] && globalData[j]["points"][i]["x"]+5 >= getpoint[0]) {
-                if(globalData[j]["points"][i]["y"]-5 <= getpoint[1] && globalData[j]["points"][i]["y"]+5 >= getpoint[1]) {
-                  dataIndex = j;
-                  pointIndex = i;
-                  break;
+        for(var j=0; j<globalData.length; j++){      
+            if(globalData[j]["type"] == "polygon"){
+                for(var i=0; i<globalData[j]["points"].length; i++){ 
+                  if(globalData[j]["points"][i]["x"]-5 <= getpoint[0] && globalData[j]["points"][i]["x"]+5 >= getpoint[0]) {
+                    if(globalData[j]["points"][i]["y"]-5 <= getpoint[1] && globalData[j]["points"][i]["y"]+5 >= getpoint[1]) {
+                      dataIndex = j;
+                      pointIndex = i;
+                      break;
+                    }
+                  }
                 }
-              }
-            }
+            }      
         }
     }
 });
