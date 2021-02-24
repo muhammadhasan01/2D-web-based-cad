@@ -11,10 +11,6 @@ function dist(x1, y1, x2, y2) {
 let linePoints = [];
 
 function handleClickCreateLine(e) {
-    if (linePoints.length == 2) {
-        alert("You cannot create any more line, please click the stop creating line button");
-        return;
-    }
     let cRect = canvas.getBoundingClientRect();              
     let canvasX = Math.round(e.clientX - cRect.left);        
     let canvasY = Math.round(e.clientY - cRect.top);
@@ -36,11 +32,10 @@ function handleClickCreateLine(e) {
             createPoint.x = linePoints[i].x, createPoint.y = linePoints[i].y-1;
             line.points.push(createPoint);
         }
-        line.length = dist(line.x1, line.y1, line.x2, line.y2);
-        line.color = "black";
         globalData.push(line);
         showGlobalData(globalData);
         renderObjects(globalData);
+        btnLine.onclick();
         return;
     }
 }
@@ -55,7 +50,6 @@ btnLine.onclick = function() {
         canvas.addEventListener("mousedown", handleClickCreateLine);
     } else {
         btnLine.innerHTML = "Start creating line";
-        alert("Stopped creating line");
         let canvas = document.getElementById("canvas");
         canvas.removeEventListener("click", handleClickCreateLine);
     }
