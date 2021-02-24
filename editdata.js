@@ -47,7 +47,6 @@ function editData() {
         place.appendChild(br.cloneNode());
     });
     btn.onclick = function() {
-        console.log("Masuk sini euy");
         for (let id = 0; id < globalData.length; id++) {
             let lbl = document.getElementById("label" + id);
             let inp = document.getElementById("input" + id);
@@ -57,7 +56,7 @@ function editData() {
             let scale = parseFloat(inp.value);
             console.log(scale);
             let geo = globalData[id];
-            for (let i = 1; i < (geo.type === "line" ? 2 : 4); i++) {
+            for (let i = 1; i < 4; i++) {
                 geo.points[i].x = geo.points[0].x + (geo.points[i].x - geo.points[0].x) * scale;
                 geo.points[i].y = geo.points[0].y + (geo.points[i].y - geo.points[0].y) * scale;
             }
