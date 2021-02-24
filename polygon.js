@@ -21,13 +21,12 @@ function handleClickCreatePolygon(e) {
     let ctx = canvas.getContext("webgl");
     let canvasX = Math.round(e.clientX - cRect.left);        
     let canvasY = Math.round(e.clientY - cRect.top);
-    // ctx.fillRect(canvasX, canvasY, 10, 10);
     console.log("We got", canvasX, canvasY);
     let curPoint = new Object;
     curPoint.x = canvasX, curPoint.y = canvasY;
     polygonPoints.push(curPoint);
     if (polygonPoints.length == numPoints) {
-        alert("Succesfully created polygon");
+        // alert("Succesfully created polygon");
         let polygon = new Object;
         polygon.type = "polygon";
         polygon.points = [];

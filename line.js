@@ -22,7 +22,7 @@ function handleClickCreateLine(e) {
     curPoint.x = canvasX, curPoint.y = canvasY;
     linePoints.push(curPoint);
     if (linePoints.length == 2) {
-        alert("Succesfully created line");
+        // alert("Succesfully created line");
         let line = new Object;
         line.type = "line";
         line.points = [];
@@ -73,7 +73,6 @@ this.canvas.addEventListener("mousedown", (e) => {
                     if(globalData[j]["points"][i]["y"]-5 <= getpoint[1] && globalData[j]["points"][i]["y"]+5 >= getpoint[1]) {
                       lineDataIndex.push(j);
                       linePointIndex.push(i);
-                    //   alert("dcdcs");
                     }
                   }
                 }
@@ -93,36 +92,6 @@ this.canvas.addEventListener("mouseup", (e) => {
 this.canvas.addEventListener("mousemove", (e) => {
     if(t.isMoving) {
         if(isDown && lineDataIndex.length == 2 && linePointIndex.length ==2) {
-            // var linePointPartner = Math.floor(((0+1+2+3) - linePointIndex[0] - linePointIndex[1]) / 2);
-            // console.log("Line Part : " + linePointPartner);
-            // var linePointSelf = linePointPartner == 2 ? 0 : 2;
-
-            // var deltaX = (globalData[lineDataIndex[0]]["points"][linePointPartner]["y"] < globalData[lineDataIndex[0]]["points"][linePointSelf]["y"]) ? 1 : -1;
-            // var deltaY = (globalData[lineDataIndex[0]]["points"][linePointPartner]["x"] < globalData[lineDataIndex[0]]["points"][linePointSelf]["x"]) ? 1 : -1;
-            // console.log(deltaX + " - " + deltaY);
-            
-            // var temp = [];
-
-            // let createPoint = new Object;
-            // createPoint.x = e.pageX - e.target.offsetLeft + deltaX, createPoint.y = e.pageY - e.target.offsetTop;
-            // temp.push(createPoint);
-
-            // createPoint = new Object;
-            // createPoint.x = e.pageX - e.target.offsetLeft, createPoint.y = e.pageY - e.target.offsetTop + deltaY;
-            // temp.push(createPoint);
-
-            // createPoint = new Object;
-            // createPoint.x = globalData[lineDataIndex[0]]["points"][linePointPartner]["x"] + deltaX, createPoint.y = globalData[lineDataIndex[0]]["points"][linePointPartner]["y"];
-            // temp.push(createPoint);
-            // console.log(createPoint.x);
-            // console.log(createPoint.y);
-            
-
-            // createPoint = new Object;
-            // createPoint.x = globalData[lineDataIndex[0]]["points"][linePointPartner]["x"], createPoint.y = globalData[lineDataIndex[0]]["points"][linePointPartner]["y"] + deltaY;
-            // temp.push(createPoint);
-
-            // globalData[lineDataIndex[0]]["points"] = temp;
 
           var linePointPartner = Math.floor(((0+1+2+3) - linePointIndex[0] - linePointIndex[1]) / 2);
 
