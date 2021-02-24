@@ -33,14 +33,12 @@ function handleClickCreatePolygon(e) {
         polygon.points = [];
         for (let i = 0; i < numPoints; i++) {
             polygon.points.push(polygonPoints[i]);
-            console.log("=======> " + this.mantap);
-            console.log(polygonPoints[i]);
         }
         polygon.color = "black";
         globalData.push(polygon);
         showGlobalData(globalData);
-        // TODO: Make sure renderObject is right
         renderObjects(globalData);
+        btnPolygon.onclick();
         return;
     }
 }
@@ -52,14 +50,17 @@ btnPolygon.onclick = function() {
         btnPolygonCnt++;
         if (btnPolygonCnt % 2 == 1) {
             btnPolygon.innerHTML = "Stop creating polygon";
-            // TODO: Handle invalid numPoints
-            numPoints = prompt("Plase input the number of point you want");
+            numPoints = parseInt(prompt("Plase input the number of point you want"));
+            if (!Number.isInteger(numPoints) || (numPoints < 3)) {
+                alert("Please input only a type of number and at least a number with value of 3");
+                btnPolygon.onclick();
+                return;
+            }
             let canvas = document.getElementById("canvas");
             polygonPoints = [];
             canvas.addEventListener("click", handleClickCreatePolygon);
         } else {
             btnPolygon.innerHTML = "Start creating polygon";
-            alert("Stopped creating polygon");
             numPoints = 0;
             let canvas = document.getElementById("canvas");
             canvas.removeEventListener("click", handleClickCreatePolygon);
@@ -70,7 +71,13 @@ btnPolygon.onclick = function() {
 
 moveButton.addEventListener("click", () => {
     t.isMoving = !t.isMoving;
-    alert("isMoving = " + t.isMoving);
+    if (t.isMoving) {
+        alert("Dragging vertex feature enabled");
+        moveButton.innerHTML = "Stop Move";
+    } else {
+        alert("Dragging vertex feature disabled");
+        moveButton.innerHTML = "Move";
+    }
 });
 
 this.canvas.addEventListener("mousedown", (e) => {
@@ -84,7 +91,6 @@ this.canvas.addEventListener("mousedown", (e) => {
                 if(globalData[j]["points"][i]["y"]-5 <= getpoint[1] && globalData[j]["points"][i]["y"]+5 >= getpoint[1]) {
                   dataIndex = j;
                   pointIndex = i;
-                //   alert("DDDDDDDDDDDDDDDDDDDDD");
                   break;
                 }
               }
