@@ -51,33 +51,5 @@ this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
     // Compile the vertex shader
     this.gl.compileShader(vertShader);
 
-    // Fragment shader source code
-    let geoColor = getColor(globalColor);
-    console.log("wow", geoColor);
-    let fragCode =
-        'void main(void) {' +
-        ` gl_FragColor = vec4(${geoColor[0]}, ${geoColor[1]}, ${geoColor[2]}, 1.0);` +
-        '}';
 
-    // Create fragment shader object 
-    let fragShader = this.gl.createShader(this.gl.FRAGMENT_SHADER);
-
-    // Attach fragment shader source code
-    this.gl.shaderSource(fragShader, fragCode);
-
-    // Compile the fragmentt shader
-    this.gl.compileShader(fragShader);
-
-    // Create a shader program object to
-    // store the combined shader program
-    let shaderProgram = this.gl.createProgram();
-
-    // Attach a vertex shader
-    this.gl.attachShader(shaderProgram, vertShader);
-
-    // Attach a fragment shader
-    this.gl.attachShader(shaderProgram, fragShader);
-
-    // Link both the programs
-    this.gl.linkProgram(shaderProgram);
 
