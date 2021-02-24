@@ -11,10 +11,6 @@ function dist(x1, y1, x2, y2) {
 let squarePoints = [];
 
 function handleClickCreateSquare(e) {
-    if (squarePoints.length == 2) {
-        alert("You cannot create any more point, please click the stop creating square button");
-        return;
-    }
     let cRect = canvas.getBoundingClientRect();              
     let canvasX = Math.round(e.clientX - cRect.left);        
     let canvasY = Math.round(e.clientY - cRect.top);
@@ -34,8 +30,6 @@ function handleClickCreateSquare(e) {
                 square.points.push(createPoint);
             }
         }
-        square.length = dist(square.x1, square.y1, square.x2, square.y2) / Math.sqrt(2);
-        square.color = "black";
         square.points.sort((a, b) => {
             if (a.x === b.x)
                 return a.y - b.y;
@@ -43,8 +37,8 @@ function handleClickCreateSquare(e) {
         });
         globalData.push(square);
         showGlobalData(globalData);
-        // TODO: Make sure renderObject is right
         renderObjects(globalData);
+        btnSquare.onclick();
         return;
     }
 }
@@ -59,7 +53,6 @@ btnSquare.onclick = function() {
         canvas.addEventListener("click", handleClickCreateSquare);
     } else {
         btnSquare.innerHTML = "Start creating Square";
-        alert("Stopped creating Square");
         let canvas = document.getElementById("canvas");
         canvas.removeEventListener("click", handleClickCreateSquare);
     }
